@@ -9,8 +9,10 @@ import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.DataProvider;
 
 import java.util.logging.Level;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
  * Created by odiachuk on 13.12.16.
@@ -49,10 +51,18 @@ public class DriverProvider {
         caps.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
 
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--no-sandbox");
         //chromeOptions.addArguments("--kiosk");
         //chromeOptions.addArguments("--start-maximized");
 
         caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+
+        synchronized (DataProvider.class) {
+//            if (PropertiesList.getConfigProperty("ChromeDriverVersion") == null)
+//                WebDriverManager.chromedriver().setup();
+//            else
+                WebDriverManager.chromedriver().version("80.0.3987.106").setup();
+        }
 
         return new ChromeDriver(caps);
 

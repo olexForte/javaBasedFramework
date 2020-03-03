@@ -34,4 +34,9 @@ public class Tools {
     public static float convertStringPriceToFloat(String strPrice){
         return Float.valueOf(strPrice.replace("$","").replace(",",""));
     }
+
+    public static String getTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        return sdf.format(new Date(System.currentTimeMillis()));
+    }
 }

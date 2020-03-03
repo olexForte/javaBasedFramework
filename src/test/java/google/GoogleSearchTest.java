@@ -14,12 +14,14 @@ public class GoogleSearchTest extends BaseTest {
 
     @DataProvider(name = "searches_request_provider")
     public Object[][] provider () throws Exception {
-        return new String[][]{{"42"}, {"Google sucks"}};
+        return new String[][]{
+                {"Answer to the Ultimate Question of Life, the Universe, and Everything", "42"},
+                {"time in kiev", Tools.getTime()}};
     }
 
 
     @Test(dataProvider="searches_request_provider")
-    public void Search(String searchRequest){
+    public void Search(String searchRequest, String response){
 
         GoogleSearchPage searchPage = new GoogleSearchPage();
 
@@ -27,7 +29,7 @@ public class GoogleSearchTest extends BaseTest {
 
         searchPage.performSearch(searchRequest);
 
-        Assert.fail("fuk");
+        Assert.assertTrue(searchPage.isTextPresent(response));
     }
 
 }

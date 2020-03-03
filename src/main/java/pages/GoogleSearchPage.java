@@ -15,7 +15,10 @@ public class GoogleSearchPage extends BasePage{
     By searchField = By.name("q");
 
     public void performSearch(String query){
+        reporter.info("Perform search: " + query);
         findElement(searchField).sendKeys(query);
         findElement(searchField).sendKeys(Keys.ENTER);
+        waitForPageToLoad();
     }
+
 }

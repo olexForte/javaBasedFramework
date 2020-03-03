@@ -123,6 +123,7 @@ public class BasePage {
     }
 
     public boolean isTextPresent(String text) {
+        reporter.info("Validate text present: " + text);
         return driver().getPageSource().contains(text);
     }
 
@@ -302,7 +303,6 @@ public class BasePage {
     }
 
     public static void waitForPageToLoad(){
-        sleepFor(STATIC_TIMEOUT); // todo fixme
         ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
 
             public Boolean apply(WebDriver driver)
